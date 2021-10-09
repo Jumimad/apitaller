@@ -1,0 +1,14 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteBase /
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin *
+    Header set Access-Control-Allow-Credentials true
+</IfModule>
+
+
+RewriteRule ^api/faker/create/([a-zA-Z0-9_-]+)/?$ api/faker/populate.php?action=create&total=$1 [QSA,L]
+RewriteRule ^api/faker/clear/?$ api/faker/populate.php?action=clear [QSA,L]
+RewriteRule ^api/customers/?$ api/customers/index.php?action=list&total=10 [QSA,L]
+RewriteRule ^api/customers/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ api/customers/index.php?action=list&total=$2&page=$1 [QSA,L]
